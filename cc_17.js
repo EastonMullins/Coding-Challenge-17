@@ -56,6 +56,7 @@ class VIPCustomer extends Customer {
       this.purchaseHistory = [];  
       this.vipLevel = vipLevel;
     }
+    
     getTotalSpent() {
         const totalSpent = this.purchaseHistory.reduce((total, amount) => total + amount, 0);
         const bonus = totalSpent * 0.1;
