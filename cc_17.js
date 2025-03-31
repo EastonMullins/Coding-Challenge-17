@@ -51,16 +51,42 @@ console.log(`Sales Rep: ${salesRep.name}, Client: ${customer1.name}, Total Spent
 
 class VIPCustomer extends Customer {
     constructor(name, email, vipLevel) {
-      this.name = name;
-      this.email = email;
-      this.purchaseHistory = [];  
+      super(name, email);
       this.vipLevel = vipLevel;
     }
-    
+
     getTotalSpent() {
-        const totalSpent = this.purchaseHistory.reduce((total, amount) => total + amount, 0);
-        const bonus = totalSpent * 0.1;
-        const totalWithBonus = totalSpent + bonus;
-        return totalWithBonus
+        const baseTotal = super.getTotalSpent();
+        return baseTotal * 1.1;
     }
 }
+
+//Task 4 - Build a Client Report System
+
+const customer2 = new VIPCustomer("Lebron James", "kingjames@gmail.com", "Platinum");
+customer2.addPurchase(1000);
+customer2.addPurchase(750);
+
+const customer3 = new Customer ("Colby Mullins", "cdog@gmail.com");
+customer3.addPurchase(250);
+customer3.addPurchase(100);
+
+const customer4 = new VIPCustomer("Tom Brady", "tb12@gmail.com", "Gold");
+customer4.addPurchase(500);
+customer4.addPurchase(700);
+
+salesRep.addClient(customer2);
+salesRep.addClient(customer3);
+salesRep.addClient(customer4);
+
+const totalRevenue = salesRep.clients.reduce((total, client) => total + client.getTotalSpent(), 0);
+console.log(`Total Revenue: $${totalRevenue}`);
+
+const highSpenders = salesRep.clients.filter(client => client.getTotalSpent() > 500);
+console.log("High Spenders:", highSpenders.map(client => `${client.name} ($${client.getTotalSpent()})`));
+
+const customerSummary = salesRep.clients.map(client => ({
+    name: client.name,
+    totalSpent: client.getTotalSpent()
+  }));
+  console.log("Customer Summary:", customerSummary);
