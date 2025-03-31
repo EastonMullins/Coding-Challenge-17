@@ -21,7 +21,7 @@ customer1.addPurchase(500);
 customer1.addPurchase(250);
 console.log(`Customer: ${customer1.name}, Total Spent: $${customer1.getTotalSpent()}`);
 
-//Task 2 - Created SalesRep Class
+//Task 2 - Created Sales Rep Class
 
 class SalesRep {
     constructor(name) {
